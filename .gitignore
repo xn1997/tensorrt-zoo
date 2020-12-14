@@ -6,4 +6,6 @@ lib/
 experimental/
 *.jpg
 !/test.jpg
+model/
+*.user
 

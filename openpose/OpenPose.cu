@@ -64,6 +64,11 @@ OpenPose::OpenPose(const std::string& prototxt,
                     int maxBatchSize,
                     int runMode) {
     mNet = new Trt();
+    // self modified for INT8
+    if(runMode == 2){
+        mNet->mBatchSize = maxBatchSize;
+        mNet->SetInt8Calibrator("Int8EntropyCalibrator2",calibratorData);
+    }
     mNet->CreateEngine(prototxt, caffeModel, saveEngine, outputBlobName, maxBatchSize, runMode);
     MallocExtraMemory();
 }
