@@ -1,9 +1,28 @@
 <!--
+
  * @Author: zerollzeng
  * @Date: 2019-09-02 16:45:43
  * @LastEditors: zerollzeng
  * @LastEditTime: 2019-12-10 17:41:21
  -->
+# 个人修改内容
+
+1. 修改部分程序，使其可以在不改变原有使用方法的情况下，使用INT8量化
+
+2. 修改`testopense.cpp`，使其进行INT8量化及推理
+
+   1. INT8量化，需要在`model/resize_image/`文件夹内存入相应的图片，名称为`{1,2,3,...}.jpg`。
+
+      数据的具体生成方法，参见`NoteBook/小程序/`下的参考程序。
+
+      用于生成`calibration校准表`，用于INT8量化
+
+## 使用方法
+
+- 配合`elevator monitor`使用
+  1. 在该项目`tensorrt-zoo`，生成`openpose`的`engine`文件
+  2. 将`engine`文件拷贝至`elevator_monitor/main/build/openpose_model/`下，供程序调用即可。
+
 # tensorrt-zoo
 common computer vision models and some useful tools base on [tiny-tensorrt](https://github.com/zerollzeng/tiny-tensorrt).
 

@@ -78,6 +78,12 @@ else()
   set(CUDA_TARGET_ARCHS_SORTED ${CUDA_TARGET_ARCHS})
   list(SORT CUDA_TARGET_ARCHS_SORTED)
   CUDA_find_supported_arch_values(CUDA_targeted_archs ${CUDA_TARGET_ARCHS_SORTED})
+
+  if (${hostname} STREQUAL "nvidia")
+    # 对于jetson设置为对应的72算力
+    set(CUDA_targeted_archs 72)
+  endif()
+
   message(STATUS "CUDA targeted archs: ${CUDA_targeted_archs}")
   if (NOT CUDA_targeted_archs)
     message(FATAL_ERROR "None of the provided CUDA architectures ({${CUDA_TARGET_ARCHS}}) is supported by nvcc, use one or more of: ${CUDA_supported_archs}")

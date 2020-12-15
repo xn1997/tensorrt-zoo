@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
 //    }
     //--------------------------------------------
     cv::Mat calibrator_image;
-    calibratorData.resize(2692);  // 224 输入至少为100张才勉强可以用，2000相对较好
+    calibratorData.resize(2692);  // 224 输入至少为100张才勉强可以用，2000相对较好——2692和2000效果一样
     for(size_t i = 0;i<calibratorData.size();i++) {
         calibratorData[i].resize(3*H*W);
         calibrator_image = cv::imread("../model/resize_image/" + std::to_string(i).append(".jpg"));
