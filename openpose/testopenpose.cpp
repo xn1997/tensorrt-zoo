@@ -28,7 +28,7 @@ std::vector<float> GetInputData(const cv::Mat& img, int N, int C, int H, int W)
         {
             for (int i = 0; i < W * H; i++)
             {
-                inputData[i + c * W * H + n * C * H * W] = (float)data[i * C + c];
+                inputData[i + c * W * H + n * C * H * W] = (float)data[i * C + c]/255.f - 0.5f;
             }
         }
     }
@@ -78,8 +78,8 @@ int main(int argc, char** argv) {
     const std::string& img_name = "../test.jpg";
     // const std::string img_name = "./test.jpg";
     int run_mode = 2;//0 for float32, 1 for float16, 2 for int8
-    int H = 480; //480;
-    int W = 640; //640;
+    int H = 224; //480;
+    int W = 224; //640;
 
     cv::Mat img = cv::imread(img_name);
     if(img.empty()) {
@@ -116,11 +116,11 @@ int main(int argc, char** argv) {
 //    }
     //--------------------------------------------
     cv::Mat calibrator_image;
-    calibratorData.resize(1000);
+    calibratorData.resize(2692);  // 224 输入至少为100张才勉强可以用，2000相对较好
     for(size_t i = 0;i<calibratorData.size();i++) {
         calibratorData[i].resize(3*H*W);
         calibrator_image = cv::imread("../model/resize_image/" + std::to_string(i).append(".jpg"));
-        printf("%d image\n",i);
+        std::cout<< i << " image\n" << std::endl;
         cv::cvtColor(calibrator_image,calibrator_image,cv::COLOR_BGR2RGB);
 //            cv::resize(calibrator_image,calibrator_image, cv::Size(W,H));
 //            cv::imshow("d",calibrator_image);

@@ -17,8 +17,16 @@ endif (NOT OpenCV_FOUND)
 include_directories(tiny-tensorrt)
 link_directories(/usr/lib/x86_64-linux-gnu)
 link_directories(lib/)
-
-find_library(CUDART cudart HINTS /usr/local/cuda/targets/x86_64-linux/lib/)
+# 查询系统名称，jeston和ubuntu下的cuda路径不一样需要分开处理
+cmake_host_system_information(RESULT hostname QUERY HOSTNAME)
+message("host name is: " ${hostname})
+if (${hostname} STREQUAL "nvidia")
+  message("use AGX Xavier")
+  find_library(CUDART cudart HINTS /usr/local/cuda/targets/aarch64-linux/lib/)
+else()
+  message("use PC")
+  find_library(CUDART cudart HINTS /usr/local/cuda/targets/x86_64-linux/lib/)
+endif()
 
 add_subdirectory(tiny-tensorrt)
 
