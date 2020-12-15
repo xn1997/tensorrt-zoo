@@ -15,7 +15,7 @@
 
       数据的具体生成方法，参见`NoteBook/小程序/`下的参考程序。
 
-      用于生成`calibration校准表`，用于INT8量化
+      生成`calibration校准表`，用于INT8量化
 
 ## 使用方法
 
